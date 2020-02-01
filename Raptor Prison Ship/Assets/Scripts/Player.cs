@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class InputControl : MonoBehaviour
+public class Player : MonoBehaviour
 {
 	public NavMeshAgent player;
 
-	public float PlayerComputerInteraction = 2.0f;	// Should be about the same as the computer's trigger colliders diameter/radius??
+	public float PlayerComputerInteractionDistance = 2.0f;	// Should be about the same as the computer's trigger colliders diameter/radius??
 
 	public int targettedComputer = 0;
 
@@ -30,7 +30,7 @@ public class InputControl : MonoBehaviour
 				if (rayResult.collider.gameObject.layer == LayerMask.NameToLayer ("Computer")) {
 					Computer touchedComputer = rayResult.collider.gameObject.GetComponent<Computer> ();
 					targettedComputer = touchedComputer.computerID;
-					if ((player.destination - player.gameObject.transform.position).magnitude < PlayerComputerInteraction ) {
+					if ((player.destination - player.gameObject.transform.position).magnitude < PlayerComputerInteractionDistance ) {
 						touchedComputer.rebootComputer ();
 					}
 				} else {
